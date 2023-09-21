@@ -59,7 +59,7 @@
     </header>
 
     <div class="container">
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 1: Urban Exploration</h2>
             <p>
                 Urban explorers investigate abandoned buildings and underground tunnels. They may need to subtract negative values representing the depth of underground passages to calculate their total length.
@@ -70,7 +70,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-
+        </div>
+        
+        <div class="use-case">
             <h2>Use Case 2: Iceberg Research</h2>
             <p>
                 Researchers studying icebergs need to calculate changes in iceberg depth below sea level. They might need to subtract integers to determine the iceberg's position in the water.
@@ -81,7 +83,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 3: Music Therapy</h2>
             <p>
                 Music therapists use music to help patients with emotional and psychological issues. When analyzing mood changes in patients, they might need to subtract negative values representing a decrease in anxiety levels.
@@ -92,7 +96,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 4: Environmental Soundscaping</h2>
             <p>
                 Soundscapers create natural sound environments for various purposes, such as stress reduction. They may need to subtract negative values representing sound intensity levels to calculate the overall sound intensity.
@@ -103,7 +109,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 5: Ghost Hunting</h2>
             <p>
                 Paranormal investigators use specialized equipment to measure paranormal activity. They might need to subtract integers when analyzing changes in temperature to identify anomalies.
@@ -116,5 +124,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript function to disable feedback buttons for the specific use case
+        function disableFeedbackButtons(clickedButton) {
+            // Find the parent use-case div containing the clicked button
+            var useCaseDiv = clickedButton.closest('.use-case');
+            
+            // Find all buttons within the specific use-case div
+            var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
+            
+            // Loop through all buttons in the specific use case
+            for (var i = 0; i < feedbackButtons.length; i++) {
+                feedbackButtons[i].disabled = true; // Disable all buttons in the specific use case
+            }
+            
+            // Enable the clicked button
+            clickedButton.disabled = false;
+        }
+
+        // Add event listeners to all feedback buttons
+        var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
+        feedbackButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                disableFeedbackButtons(this);
+            });
+        });
+    </script>
 </body>
 </html>

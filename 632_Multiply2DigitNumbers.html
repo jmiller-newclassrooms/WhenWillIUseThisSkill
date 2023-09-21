@@ -129,5 +129,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript to disable feedback buttons in the same use case
+        const useCaseContainers = document.querySelectorAll('.container');
+        useCaseContainers.forEach(container => {
+            const feedbackButtons = container.querySelectorAll('.feedback-buttons button');
+            feedbackButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    disableFeedbackButtons(this); // Disable other buttons in the same use case
+                });
+            });
+        });
+
+        function disableFeedbackButtons(clickedButton) {
+            const feedbackButtons = clickedButton.parentElement.querySelectorAll('button');
+            feedbackButtons.forEach(button => {
+                button.disabled = true; // Disable all buttons in the same container
+            });
+            clickedButton.disabled = false; // Enable the clicked button
+        }
+    </script>
 </body>
 </html>

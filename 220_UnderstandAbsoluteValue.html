@@ -54,83 +54,102 @@
     </style>
 </head>
 <body>
-
     <header>
         <h1>Math in Context: Understand Absolute Value</h1>
     </header>
 
     <div class="container">
-
-        <div class="container">
-
+        <div class="use-case">
             <h2>Use Case 1: Cryptozoology (Study of Hidden Animals)</h2>
-
             <p>
                 Cryptozoologists investigate reports of mysterious creatures, including the depth at which they are believed to live. Understanding absolute value helps them analyze the potential depths of these cryptic animals.
             </p>
-
             <div class="feedback-buttons">
                 <button class="interesting">Interesting<span>&#129299;</span></button>
                 <button class="funny">Funny<span>&#128514;</span></button>
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-
+        </div>
+        
+        <div class="use-case">
             <h2>Use Case 2: Ghost Hunting</h2>
-
             <p>
                 Ghost hunters use various instruments to measure paranormal activity, including changes in temperature. Absolute value helps them interpret temperature fluctuations, whether they are increases or decreases.
             </p>
-
             <div class="feedback-buttons">
                 <button class="interesting">Interesting<span>&#129299;</span></button>
                 <button class="funny">Funny<span>&#128514;</span></button>
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 3: Ufology (Study of Unidentified Flying Objects)</h2>
-
             <p>
                 Ufologists analyze sightings of UFOs, which often involve rapid changes in altitude. Understanding absolute value helps them quantify these changes and assess the capabilities of unidentified flying objects.
             </p>
-
             <div class="feedback-buttons">
                 <button class="interesting">Interesting<span>&#129299;</span></button>
                 <button class="funny">Funny<span>&#128514;</span></button>
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 4: Parapsychology (Study of Psychic Phenomena)</h2>
-
             <p>
                 Parapsychologists study psychic abilities, including telekinesis, which can involve both the movement of objects up or down. Absolute value helps them measure the strength of telekinetic forces.
             </p>
-
             <div class="feedback-buttons">
                 <button class="interesting">Interesting<span>&#129299;</span></button>
                 <button class="funny">Funny<span>&#128514;</span></button>
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="use-case">
             <h2>Use Case 5: Exobotany (Study of Extraterrestrial Plants)</h2>
-
             <p>
                 Exobotanists explore the possibility of plant life on other planets. Absolute value is useful for interpreting temperature variations on alien worlds, whether they are extreme cold or extreme heat.
             </p>
-
             <div class="feedback-buttons">
                 <button class="interesting">Interesting<span>&#129299;</span></button>
                 <button class="funny">Funny<span>&#128514;</span></button>
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-
         </div>
-
     </div>
 
+    <script>
+        // JavaScript function to disable feedback buttons for the specific use case
+        function disableFeedbackButtons(clickedButton) {
+            // Find the parent use-case div containing the clicked button
+            var useCaseDiv = clickedButton.closest('.use-case');
+            
+            // Find all buttons within the specific use-case div
+            var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
+            
+            // Loop through all buttons in the specific use case
+            for (var i = 0; i < feedbackButtons.length; i++) {
+                feedbackButtons[i].disabled = true; // Disable all buttons in the specific use case
+            }
+            
+            // Enable the clicked button
+            clickedButton.disabled = false;
+        }
+
+        // Add event listeners to all feedback buttons
+        var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
+        feedbackButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                disableFeedbackButtons(this);
+            });
+        });
+    </script>
 </body>
 </html>

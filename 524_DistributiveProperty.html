@@ -70,7 +70,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 2: Cryonics</h2>
             <p>
                 In cryonics (preservation of bodies at low temperatures), experts need to determine the surface area of complex-shaped cryogenic containers. The Distributive Property helps them calculate the area accurately by breaking it down into simpler geometric shapes.
@@ -81,7 +83,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 3: Ergonomics</h2>
             <p>
                 In ergonomics (design of workspaces for human efficiency), specialists analyze the layout of workspace elements like desks and partitions. They use the Distributive Property to distribute dimensions and calculate the total area for efficient workspace design.
@@ -92,7 +96,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 4: Music Therapy</h2>
             <p>
                 In music therapy (using music for healing), therapists work with varying musical compositions. The Distributive Property can be applied to expand and simplify musical expressions, making it easier to analyze and modify music for therapeutic purposes.
@@ -103,7 +109,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 5: Ethnomathematics</h2>
             <p>
                 In ethnomathematics (mathematics in different cultures), ethnomathematicians explore mathematical concepts in various cultural contexts. They may use the Distributive Property to relate indigenous mathematical techniques to the more familiar concept of the distributive property.
@@ -116,5 +124,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript to disable feedback buttons in the same use case
+        const useCaseContainers = document.querySelectorAll('.container');
+        useCaseContainers.forEach(container => {
+            const feedbackButtons = container.querySelectorAll('.feedback-buttons button');
+            feedbackButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    disableFeedbackButtons(this); // Disable other buttons in the same use case
+                });
+            });
+        });
+
+        function disableFeedbackButtons(clickedButton) {
+            const feedbackButtons = clickedButton.parentElement.querySelectorAll('button');
+            feedbackButtons.forEach(button => {
+                button.disabled = true; // Disable all buttons in the same container
+            });
+            clickedButton.disabled = false; // Enable the clicked button
+        }
+    </script>
 </body>
 </html>

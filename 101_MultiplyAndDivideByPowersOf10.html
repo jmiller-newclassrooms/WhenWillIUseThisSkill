@@ -59,7 +59,7 @@
     </header>
 
     <div class="container">
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 1: Astrobiology</h2>
             <p>
                 When studying extremophiles (organisms that can live in extreme environments) on other planets, scientists may need to convert temperatures from Celsius to Kelvin (multiply by 1.0) or back to Celsius (divide by 1.0) to understand the habitability of those environments.
@@ -71,7 +71,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
         
+        <div class="use-case">
             <h2>Use Case 2: Forensic Entomology</h2>
             <p>
                 Forensic entomologists use the growth rate of insects on a corpse to estimate the time of death. They might need to multiply or divide by powers of 10 when converting between hours, days, and weeks.
@@ -83,7 +85,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-        
+        </div>
+
+        <div class="use-case">
             <h2>Use Case 3: Cryptography</h2>
             <p>
                 Cryptographers use large prime numbers to create secure encryption. They may need to multiply and divide these numbers by powers of 10 to manage the complexity of their algorithms.
@@ -95,7 +99,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-        
+        </div>
+
+        <div class="use-case">
             <h2>Use Case 4: Ethnobotany</h2>
             <p>
                 Ethnobotanists study traditional plant knowledge. They may need to convert measurements of medicinal plant compounds from grams to milligrams (multiply by 1,000) for precise analysis.
@@ -107,7 +113,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
-        
+        </div>
+
+        <div class="use-case">
             <h2>Use Case 5: Marine Archaeology</h2>
             <p>
                 When exploring shipwrecks in deep-sea environments, marine archaeologists use remotely operated vehicles (ROVs) with cameras. They might need to convert depths from meters to kilometers (multiply by 0.001) to map the site accurately.
@@ -121,5 +129,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript function to disable feedback buttons for the specific use case
+        function disableFeedbackButtons(clickedButton) {
+            // Find the parent use-case div containing the clicked button
+            var useCaseDiv = clickedButton.closest('.use-case');
+            
+            // Find all buttons within the specific use-case div
+            var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
+            
+            // Loop through all buttons in the specific use case
+            for (var i = 0; i < feedbackButtons.length; i++) {
+                feedbackButtons[i].disabled = true; // Disable all buttons in the specific use case
+            }
+            
+            // Enable the clicked button
+            clickedButton.disabled = false;
+        }
+
+        // Add event listeners to all feedback buttons
+        var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
+        feedbackButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                disableFeedbackButtons(this);
+            });
+        });
+    </script>
 </body>
 </html>

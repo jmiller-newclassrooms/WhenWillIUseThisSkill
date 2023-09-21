@@ -71,7 +71,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 2: Environmental Conservation</h2>
             <p>
                 Conservationists protect ecosystems and wildlife. They use multiplicative comparisons to analyze population growth of endangered species.
@@ -83,7 +85,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 3: Fashion Design Technology</h2>
             <p>
                 Fashion technologists create sustainable clothing. They use multiplicative comparisons to calculate the environmental impact of fabric production with different technologies.
@@ -95,7 +99,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 4: Space Tourism</h2>
             <p>
                 Space tourism experts plan commercial space travel. They use multiplicative comparisons to estimate cost savings with reusable rocket technology.
@@ -107,7 +113,9 @@
                 <button class="boring">Boring<span>&#128564;</span></button>
                 <button class="bad">Bad<span>&#128530;</span></button>
             </div>
+        </div>
 
+        <div class="container">
             <h2>Use Case 5: Music Production</h2>
             <p>
                 Music producers create music with technology. They use multiplicative comparisons to adjust track volumes for sound balance.
@@ -121,5 +129,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JavaScript to disable feedback buttons in the same use case
+        const useCaseContainers = document.querySelectorAll('.container');
+        useCaseContainers.forEach(container => {
+            const feedbackButtons = container.querySelectorAll('.feedback-buttons button');
+            feedbackButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    disableFeedbackButtons(this); // Disable other buttons in the same use case
+                });
+            });
+        });
+
+        function disableFeedbackButtons(clickedButton) {
+            const feedbackButtons = clickedButton.parentElement.querySelectorAll('button');
+            feedbackButtons.forEach(button => {
+                button.disabled = true; // Disable all buttons in the same container
+            });
+            clickedButton.disabled = false; // Enable the clicked button
+        }
+    </script>
 </body>
 </html>
