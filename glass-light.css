@@ -172,3 +172,9 @@ button:hover{
     box-shadow: 0px 8px 16px rgba(0,0,0,.4);
 
 }
+
+button:disabled{
+  background-color: #F9F8F5;
+  color: #9C9B9B;
+  cursor: not-allowed;
+}
