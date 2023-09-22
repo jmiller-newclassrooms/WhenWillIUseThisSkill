@@ -25,7 +25,7 @@
     </header>
 
     <div class="container">
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 1: Archaeoastronomy</h2>
             <p>
                 Archaeoastronomers study ancient cultures' astronomical practices. They use multiplicative comparisons to understand how ancient civilizations calculated lunar cycles for their calendars.
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 2: Environmental Conservation</h2>
             <p>
                 Conservationists protect ecosystems and wildlife. They use multiplicative comparisons to analyze population growth of endangered species.
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 3: Fashion Design Technology</h2>
             <p>
                 Fashion technologists create sustainable clothing. They use multiplicative comparisons to calculate the environmental impact of fabric production with different technologies.
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 4: Space Tourism</h2>
             <p>
                 Space tourism experts plan commercial space travel. They use multiplicative comparisons to estimate cost savings with reusable rocket technology.
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="use-case">
             <h2>Use Case 5: Music Production</h2>
             <p>
                 Music producers create music with technology. They use multiplicative comparisons to adjust track volumes for sound balance.
@@ -97,24 +97,31 @@
     </div>
 
     <script>
-        // JavaScript to disable feedback buttons in the same use case
-        const useCaseContainers = document.querySelectorAll('.container');
-        useCaseContainers.forEach(container => {
-            const feedbackButtons = container.querySelectorAll('.feedback-buttons button');
-            feedbackButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    disableFeedbackButtons(this); // Disable other buttons in the same use case
-                });
+        // JavaScript function to disable feedback buttons for the specific use case
+        function disableFeedbackButtons(clickedButton) {
+            // Find the parent use-case div containing the clicked button
+            var useCaseDiv = clickedButton.closest('.use-case');
+            dataLayer.push({'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
+            
+            // Find all buttons within the specific use-case div
+            var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
+            
+            // Loop through all buttons in the specific use case
+            for (var i = 0; i < feedbackButtons.length; i++) {
+                feedbackButtons[i].disabled = true; // Disable all buttons in the specific use case
+            }
+            
+            // Enable the clicked button
+            clickedButton.disabled = false;
+        }
+
+        // Add event listeners to all feedback buttons
+        var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
+        feedbackButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                disableFeedbackButtons(this);
             });
         });
-
-        function disableFeedbackButtons(clickedButton) {
-            const feedbackButtons = clickedButton.parentElement.querySelectorAll('button');
-            feedbackButtons.forEach(button => {
-                button.disabled = true; // Disable all buttons in the same container
-            });
-            clickedButton.disabled = false; // Enable the clicked button
-        }
     </script>
 </body>
 </html>

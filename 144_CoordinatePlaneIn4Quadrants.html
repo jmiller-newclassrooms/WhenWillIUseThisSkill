@@ -102,6 +102,7 @@
         function disableFeedbackButtons(clickedButton) {
             // Find the parent use-case div containing the clicked button
             var useCaseDiv = clickedButton.closest('.use-case');
+            dataLayer.push({'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
             
             // Find all buttons within the specific use-case div
             var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
