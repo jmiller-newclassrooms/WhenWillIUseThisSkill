@@ -102,6 +102,7 @@
         var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
         feedbackButtons.forEach(function(button) {
             button.addEventListener('click', function() {
+                pushReactionInfoToDataLayer(this);
                 disableFeedbackButtons(this);
             });
         });
