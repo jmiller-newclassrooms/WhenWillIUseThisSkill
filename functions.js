@@ -14,3 +14,10 @@ function disableFeedbackButtons(clickedButton) {
     // Enable the clicked button
     clickedButton.disabled = false;
 }
+
+function pushReactionInfoToDataLayer(clickedButton) {
+    const urlParams = new URLSearchParams(window.location.search);
+    var useCaseDiv = clickedButton.closest('.use-case');
+    window.dataLayer = window.dataLayer || [];
+        dataLayer.push({'event': 'reaction', 'user': urlParams.get('student'), 'skill': urlParams.get('skill'), 'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
+}
