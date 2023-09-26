@@ -102,6 +102,9 @@
         var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
         feedbackButtons.forEach(function(button) {
             button.addEventListener('click', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                var useCaseDiv = button.closest('.use-case');
+                dataLayer.push({'user': urlParams.get('student'), 'skill': urlParams.get('skill'), 'useCase': useCaseDiv.children[0].innerText, 'reaction': button.className}); 
                 disableFeedbackButtons(this);
             });
         });
