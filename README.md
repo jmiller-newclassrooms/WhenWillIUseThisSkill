@@ -17,3 +17,5 @@ website repo for the 'When Will I Use this Skill' feature
 ## Dev Notes
 - Preview with LiveServer VSCode extension.
 - Set up a workaround for Single-Page-App routing using a custom 404 page and a short script on the index file. The main benefit to this design is that we can programmatically generate skill-specific pages without having to create a pre-build process.
+  - Downside is that it may still trigger browser notifications based on the 404 redirect.
+- 
