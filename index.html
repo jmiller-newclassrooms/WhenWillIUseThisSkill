@@ -105,7 +105,7 @@
                 // Render Home
                 title = `When Will I Use This Skill?`;
                 let listOfLinks = useCases.map((skill)=>{
-                    return `<li><a href="/${skill.skill}?student=${99999}">${skill.name}</a></li>`
+                    return `<li><a href="/${skill.skill}?student=${99999}&skill=${skill.skill}">${skill.name}</a></li>`
                 }).join("");
                 contentHTML = `<ul>${listOfLinks}</ul>`;
             } else {
