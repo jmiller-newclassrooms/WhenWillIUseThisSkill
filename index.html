@@ -42,24 +42,152 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDFW3MSD"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
     <header>
         <h1>When Will I Use This Skill?</h1>
     </header>
     <main>
         <div class="container">
-        <ul>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/632_Multiply2DigitNumbers.html?skill=632&student=99999">Multiply 2-digit Whole Numbers</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/185_IDFactorsofWholeNumbers.html?skill=185&student=99999">Identify Factors of Whole Numbers</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/639_MultiplicativeComparisons.html?skill=639&student=99999">Multiplicative Comparisons</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/220_UnderstandAbsoluteValue.html?skill=220&student=99999">Understand Absolute Value</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/144_CoordinatePlaneIn4Quadrants.html?skill=144&student=99999">Coordinate Plane in 4 Quadrants</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/524_DistributiveProperty.html?skill=524&student=99999">Distributive Property</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/101_MultiplyAndDivideByPowersOf10.html?skill=101&student=99999">Multiply & Divide by Powers of 10</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/209_SubtractIntegers.html?skill=209&student=99999">Subtract Integers</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/304_1StepEquationWordProblems.html?skill=304&student=99999">1-Step Equations Word Problems</a></li>
-            <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/152_2StepInequalities.html?skill=152&student=99999">Solve 2-Step Inequalities</a></li>
-        </ul>
-    </div>
+            <ul>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/632_Multiply2DigitNumbers.html?skill=632&student=99999">Multiply 2-digit Whole Numbers</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/185_IDFactorsofWholeNumbers.html?skill=185&student=99999">Identify Factors of Whole Numbers</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/639_MultiplicativeComparisons.html?skill=639&student=99999">Multiplicative Comparisons</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/220_UnderstandAbsoluteValue.html?skill=220&student=99999">Understand Absolute Value</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/144_CoordinatePlaneIn4Quadrants.html?skill=144&student=99999">Coordinate Plane in 4 Quadrants</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/524_DistributiveProperty.html?skill=524&student=99999">Distributive Property</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/101_MultiplyAndDivideByPowersOf10.html?skill=101&student=99999">Multiply & Divide by Powers of 10</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/209_SubtractIntegers.html?skill=209&student=99999">Subtract Integers</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/304_1StepEquationWordProblems.html?skill=304&student=99999">1-Step Equations Word Problems</a></li>
+                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/152_2StepInequalities.html?skill=152&student=99999">Solve 2-Step Inequalities</a></li>
+            </ul>
+        </div>
     </main>
+
+    <!-- <script src="./functions.js"></script> -->
+    <script type="module">
+        // Route + Render page. 
+        import { useCases } from "./use-cases.js";
+
+        // JavaScript function to disable feedback buttons for the specific use case
+        function disableFeedbackButtons(clickedButton) {
+            // Find the parent use-case div containing the clicked button
+            var useCaseDiv = clickedButton.closest('.use-case');
+            
+            // Find all buttons within the specific use-case div
+            var feedbackButtons = useCaseDiv.querySelectorAll('.feedback-buttons button');
+            
+            // Loop through all buttons in the specific use case
+            for (var i = 0; i < feedbackButtons.length; i++) {
+                feedbackButtons[i].disabled = true; // Disable all buttons in the specific use case
+            }
+            
+            // Enable the clicked button
+            clickedButton.disabled = false;
+        }
+
+        function pushReactionInfoToDataLayer(clickedButton) {
+            const urlParams = new URLSearchParams(window.location.search);
+            var useCaseDiv = clickedButton.closest('.use-case');
+            window.dataLayer = window.dataLayer || [];
+                dataLayer.push({'event': 'reaction', 'user': urlParams.get('student'), 'skill': urlParams.get('skill'), 'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
+        }
+
+        // Function to handle different routes
+        function route(path) {
+            let [pathName, search] = path.split("?");
+            pathName = pathName.replace(/^\//, ''); // Remove leading slash if present
+            const query = new URLSearchParams(search);
+
+            let title = "When will I use this?";
+            let contentHTML = "";
+            
+            if ([""].includes(pathName)) {
+                // Render Home
+                title = `When Will I Use This Skill?`;
+                let listOfLinks = useCases.map((skill)=>{
+                    return `<li><a href="/${skill.skill}?student=${99999}">${skill.name}</a></li>`
+                }).join("");
+                contentHTML = `<ul>${listOfLinks}</ul>`;
+            } else {
+                useCases.forEach(skill => {
+                    if (skill.skill.toString() === pathName) {
+                        title = `Math in Context: ${skill.name}`;
+                        const buttonsHTML = [
+                            {className: "interesting", text: "Interesting", icon: "&#129299;"},
+                            {className: "funny", text: "Funny", icon: "&#128514;"},
+                            {className: "boring", text: "Boring", icon: "&#128564;"},
+                            {className: "bad", text: "Bad", icon: "&#128530;"},
+                        ].map((buttonData)=>{
+                            return `<button class="${buttonData.className}">${buttonData.text}<span>${buttonData.icon}</span></button>`;
+                        }).join("");
+                        contentHTML = skill.examples.map((useCaseExample)=>{
+                            return `<div class="use-case">
+                                <h2>${useCaseExample.title}</h2>
+                                <p>${useCaseExample.content}</p>
+                                <div class="feedback-buttons">
+                                    ${buttonsHTML}
+                                </div>
+                            </div>`;
+                        })
+                    }
+                });
+
+                if (!contentHTML) {
+                    // Page hasn't been assigned, show a 404
+                    title = "404: Page Not Found";
+                    contentHTML = "<p>Sorry about this! The link you followed doesn't seem to be connected to anything. See <a href='/'>a list of all skills</a>?</p>";
+                }
+            }
+
+            let heading = document.querySelector('header h1');
+            if (heading) {
+                heading.innerHTML = title;
+            }
+            let content = document.querySelector('main .container');
+            if (content) {
+                content.innerHTML = contentHTML;
+            }
+
+            // Attach events to any relevant buttons
+            var feedbackButtons = document.querySelectorAll('.feedback-buttons button');
+            feedbackButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    pushReactionInfoToDataLayer(this);
+                    disableFeedbackButtons(this);
+                });
+            });
+        }
+
+        // Update URL and route programmatically
+        function navigateTo(path) {
+            history.pushState({}, '', path);
+            route(path);
+        }
+
+        // Listen for popstate events (Back and Forward buttons)
+        window.addEventListener('popstate', function (e) {
+            route(window.location.pathname + window.location.search);
+        });
+
+        // Intercept clicks on links
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const path = e.target.getAttribute('href');
+                navigateTo(path);
+            }
+        });
+
+        // Handle other UI elements like buttons
+        document.addEventListener('click', function (e) {
+            if (e.target.tagName === 'BUTTON') {
+                const path = e.target.getAttribute('data-route');
+                if (path) navigateTo(path);
+            }
+        });
+
+        // Initialize route on page load
+        route(window.location.pathname + window.location.search);
+    </script>
 </body>
 </html>
