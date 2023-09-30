@@ -44,22 +44,11 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-        <h1>When Will I Use This Skill?</h1>
+        <h1>[Loading ...]</h1>
     </header>
     <main>
         <div class="container">
-            <ul>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/632_Multiply2DigitNumbers.html?skill=632&student=99999">Multiply 2-digit Whole Numbers</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/185_IDFactorsofWholeNumbers.html?skill=185&student=99999">Identify Factors of Whole Numbers</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/639_MultiplicativeComparisons.html?skill=639&student=99999">Multiplicative Comparisons</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/220_UnderstandAbsoluteValue.html?skill=220&student=99999">Understand Absolute Value</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/144_CoordinatePlaneIn4Quadrants.html?skill=144&student=99999">Coordinate Plane in 4 Quadrants</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/524_DistributiveProperty.html?skill=524&student=99999">Distributive Property</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/101_MultiplyAndDivideByPowersOf10.html?skill=101&student=99999">Multiply & Divide by Powers of 10</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/209_SubtractIntegers.html?skill=209&student=99999">Subtract Integers</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/304_1StepEquationWordProblems.html?skill=304&student=99999">1-Step Equations Word Problems</a></li>
-                <li><a href="https://jmillernc.github.io/WhenWillIUseThisSkill/152_2StepInequalities.html?skill=152&student=99999">Solve 2-Step Inequalities</a></li>
-            </ul>
+            [Loading ...]
         </div>
     </main>
 
@@ -67,6 +56,8 @@
     <script type="module">
         // Route + Render page. 
         import { useCases } from "./use-cases.js";
+
+        let isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
         // JavaScript function to disable feedback buttons for the specific use case
         function disableFeedbackButtons(clickedButton) {
@@ -95,7 +86,12 @@
         // Function to handle different routes
         function route(path) {
             let [pathName, search] = path.split("?");
-            pathName = pathName.replace(/^\//, ''); // Remove leading slash if present
+            // Github deploy has a subfolder in path
+            if (isLocalhost) {
+                pathName = pathName.replace(/^\//, ''); // Remove leading slash if present
+            } else {
+                pathName = pathName.replace(/^\/WhenWillIUseThisSkill\//, ''); // Remove subfolder if present.
+            }
             const query = new URLSearchParams(search);
 
             let title = "When will I use this?";
@@ -128,7 +124,7 @@
                                     ${buttonsHTML}
                                 </div>
                             </div>`;
-                        })
+                        }).join("");
                     }
                 });
 
@@ -160,6 +156,9 @@
 
         // Update URL and route programmatically
         function navigateTo(path) {
+            if (!isLocalhost) {
+                path = "/WhenWillIUseThisSkill" + path;
+            }
             history.pushState({}, '', path);
             route(path);
         }
