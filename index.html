@@ -59,6 +59,13 @@
 
         let isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
+        // Set a random student id to use if one was not provided in the link:
+        if (!localStorage.getItem('studentID')) {
+            const randomID = Math.floor(Math.random() * 1000000000);
+            localStorage.setItem('studentID', randomID.toString());
+        }
+        const studentID = localStorage.getItem('studentID');
+        
         // JavaScript function to disable feedback buttons for the specific use case
         function disableFeedbackButtons(clickedButton) {
             // Find the parent use-case div containing the clicked button
@@ -79,8 +86,9 @@
         function pushReactionInfoToDataLayer(clickedButton) {
             const urlParams = new URLSearchParams(window.location.search);
             var useCaseDiv = clickedButton.closest('.use-case');
+            let bestStudentID = urlParams.get('student') || studentID;
             window.dataLayer = window.dataLayer || [];
-                dataLayer.push({'event': 'reaction', 'user': urlParams.get('student'), 'skill': urlParams.get('skill'), 'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
+                dataLayer.push({'event': 'reaction', 'user': bestStudentID, 'skill': urlParams.get('skill'), 'useCase': useCaseDiv.children[0].innerText, 'reaction': clickedButton.className}); 
         }
 
         // Function to handle different routes
@@ -101,7 +109,7 @@
                 // Render Home
                 title = `When Will I Use This Skill?`;
                 let listOfLinks = useCases.map((skill)=>{
-                    return `<li><a href="/${skill.skill}?student=${99999}&skill=${skill.skill}">${skill.name}</a></li>`
+                    return `<li><a href="/${skill.skill}?student=${studentID}&skill=${skill.skill}">${skill.name}</a></li>`
                 }).join("");
                 contentHTML = `<ul>${listOfLinks}</ul>`;
             } else {

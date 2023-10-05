@@ -288,7 +288,7 @@ export const useCases = [
   },
 
   {
-    "skill": 632,
+    "skill": 639,
     "name": "Multiplicative Comparisons",
     "examples": [
       {
